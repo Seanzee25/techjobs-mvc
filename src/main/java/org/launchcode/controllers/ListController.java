@@ -14,23 +14,10 @@ import java.util.HashMap;
  */
 @Controller
 @RequestMapping(value = "list")
-public class ListController {
-
-    static HashMap<String, String> columnChoices = new HashMap<>();
-
-    public ListController () {
-        columnChoices.put("core competency", "Skill");
-        columnChoices.put("employer", "Employer");
-        columnChoices.put("location", "Location");
-        columnChoices.put("position type", "Position Type");
-        columnChoices.put("all", "All");
-    }
+public class ListController extends TechJobsController {
 
     @RequestMapping(value = "")
     public String list(Model model) {
-
-        model.addAttribute("columns", columnChoices);
-
         return "list";
     }
 
@@ -44,7 +31,7 @@ public class ListController {
             return "list-jobs";
         } else {
             ArrayList<String> items = JobData.findAll(column);
-            model.addAttribute("title", "All " + columnChoices.get(column) + " Values");
+            model.addAttribute("title", "All " + getColumnChoices().get(column) + " Values");
             model.addAttribute("column", column);
             model.addAttribute("items", items);
             return "list-column";
@@ -57,7 +44,7 @@ public class ListController {
             @RequestParam String column, @RequestParam String value) {
 
         ArrayList<HashMap<String, String>> jobs = JobData.findByColumnAndValue(column, value);
-        model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
+        model.addAttribute("title", "Jobs with " + getColumnChoices().get(column) + ": " + value);
         model.addAttribute("jobs", jobs);
 
         return "list-jobs";
