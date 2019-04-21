@@ -26,6 +26,23 @@
             </div>
         </div>
     </div>
+
+    <div th:fragment="display-jobs">
+        <div th:if="${jobs}">
+            <h3 th:text="|${jobs.size()} Result(s)|"></h3>
+            <div th:if="${jobs.size()}">
+                <div>
+                    <table th:each="job : ${jobs}" class="job-listing">
+                        <tr th:each="entry : ${job}">
+                            <td><strong th:text="${#strings.capitalizeWords(entry.key)}"></strong></td>
+                            <td th:text="${#strings.capitalizeWords(entry.value)}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div th:fragment="bootstrap">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

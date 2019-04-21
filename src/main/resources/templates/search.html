@@ -36,19 +36,7 @@
 
     <hr />
 
-    <div th:if="${jobs}">
-        <h3 th:text="|${jobs.size()} Result(s)|"></h3>
-        <div th:if="${jobs.size()}">
-            <div>
-                <table th:each="job : ${jobs}" class="job-listing">
-                    <tr th:each="entry : ${job}">
-                        <td><strong th:text="${#strings.capitalizeWords(entry.key)}"></strong></td>
-                        <td th:text="${#strings.capitalizeWords(entry.value)}"></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
+    <div th:replace="fragments :: display-jobs"></div>
 
 </div>
 <div th:replace="fragments :: bootstrap"></div>
